@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        caption {
+            font-size: 1.5em;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Results Page</h1>
+        
+        <table>
+            <caption>Wskaźniki płynności</caption>
+            <thead>
+                <tr>
+                    <th>Result1</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Placeholder for Result1</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
+        <table>
+            <caption>Wskaźniki aktywów</caption>
+            <thead>
+                <tr>
+                    <th>Result2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Placeholder for Result2</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
+        <table>
+            <caption>Wskaźniki pasywów</caption>
+            <thead>
+                <tr>
+                    <th>Result3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Placeholder for Result3</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+        
+        <a href="{{ url_for('main.index') }}">Back to Home</a>
+    </div>
+</body>
+</html>
