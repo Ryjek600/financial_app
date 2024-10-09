@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Data</title>
+</head>
+<body>
+    <h1>Preview Data</h1>
+    <form action="{{ url_for('main.confirm_insert') }}" method="POST">
+        <input type="hidden" name="date" value="{{ date | default('2024-01-01') }}"> <!-- Default date -->
+        <input type="hidden" name="total_assets" value="{{ total_assets }}">
+        <input type="hidden" name="fixed_assets" value="{{ fixed_assets }}">
+        <input type="hidden" name="current_assets" value="{{ current_assets }}">
+        <input type="hidden" name="short_term_receivables" value="{{ short_term_receivables }}">
+        <input type="hidden" name="cash_and_equivalents" value="{{ cash_and_equivalents }}">
+        <input type="hidden" name="inventory" value="{{ inventory }}">
+        <input type="hidden" name="short_term_liabilities" value="{{ short_term_liabilities }}">
+        <input type="hidden" name="long_term_liabilities" value="{{ long_term_liabilities }}">
+        <input type="hidden" name="trade_payables" value="{{ trade_payables }}">
+        <input type="hidden" name="equity" value="{{ equity }}">
+        <input type="hidden" name="net_revenues" value="{{ net_revenues }}"> <!-- Net revenues -->
+        <input type="hidden" name="operating_costs" value="{{ operating_costs }}"> <!-- Operating costs -->
+
+        <p>Total assets: {{ total_assets }}</p>
+        <p>Fixed assets: {{ fixed_assets }}</p>
+        <p>Current assets: {{ current_assets }}</p>
+        <p>Short-term receivables: {{ short_term_receivables }}</p>
+        <p>Cash and equivalents: {{ cash_and_equivalents }}</p>
+        <p>Inventory: {{ inventory }}</p>
+        <p>Short-term liabilities: {{ short_term_liabilities }}</p>
+        <p>Long-term liabilities: {{ long_term_liabilities }}</p>
+        <p>Trade payables: {{ trade_payables }}</p>
+        <p>Equity: {{ equity }}</p>
+        <p>Net Revenues: {{ net_revenues }}</p> <!-- Net revenues -->
+        <p>Operating Costs: {{ operating_costs }}</p> <!-- Operating costs -->
+
+        <button type="submit">Confirm and Submit</button>
+    </form>
+    <a href="{{ url_for('main.upload') }}">Back to Upload</a>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert XML File</title>
+</head>
+<body>
+    <h1>Upload XML File</h1>
+    <form action="{{ url_for('main.insertxml') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xml" required>
+        <input type="date" name="date" required> <!-- Added date input -->
+        <input type="submit" value="Upload">
+    </form>
+
+    <p>Upload Results</p>
+    <a href="{{ url_for('main.upload') }}">Return to Upload</a>
+    <a href="{{ url_for('main.index') }}">Return to Main Page</a>
+</body>
+</html>
+
+
+

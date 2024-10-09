@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results</title>
+    <title>Wyniki</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,20 +16,30 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
         h1 {
-            font-size: 2em;
+            font-size: 2.5em;
             margin-bottom: 20px;
+            width: 100%;
+        }
+        .tables {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
         table {
             width: 100%;
-            margin: 20px 0;
+            max-width: 600px; /* Set a max width for the tables */
             border-collapse: collapse;
+            text-align: left;
         }
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
-            text-align: left;
         }
         th {
             background-color: #f2f2f2;
@@ -39,58 +49,142 @@
             margin: 10px 0;
             font-weight: bold;
         }
+        .source-table {
+            margin-left: 40px; /* Greater spacing from other tables */
+            max-width: 300px; /* Set a max width for the source table */
+        }
+        .delete-icon {
+            width: 30px; 
+            height: 30px; 
+            cursor: pointer; 
+        }
     </style>
 </head>
 <body>
+    <h1>Strona wyników</h1>
     <div class="container">
-        <h1>Results Page</h1>
-        
-        <table>
-            <caption>Wskaźniki płynności</caption>
-            <thead>
-                <tr>
-                    <th>Result1</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Placeholder for Result1</td>
-                </tr>
-                <!-- Add more rows as needed -->
-            </tbody>
-        </table>
+        <div class="source-table">
+            <table>
+                <caption>Źródła wpisów</caption>
+                <thead>
+                    <tr>
+                        <th>Data dodania</th>
+                        <th>Data</th>
+                        <th>Źródło</th>
+                        <th>Akcja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in entries %}
+                    <tr>
+                        <td>{{ entry.submit_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ entry.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ entry.source }}</td>
+                        <td>
+                            <form action="{{ url_for('main.delete_entry', entry_id=entry.id) }}" method="post" style="display:inline;">
+                                <button type="submit" style="border: none; background: none;">
+                                    <img src="{{ url_for('static', filename='images/bin.png') }}" alt="Delete" class="delete-icon">
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-        <table>
-            <caption>Wskaźniki aktywów</caption>
-            <thead>
-                <tr>
-                    <th>Result2</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Placeholder for Result2</td>
-                </tr>
-                <!-- Add more rows as needed -->
-            </tbody>
-        </table>
+        <div class="tables">
+            <!-- Table for Liquidity Ratios -->
+            <table>
+                <caption>Wskaźniki płynności</caption>
+                <thead>
+                    <tr>
+                        <th>Data dodania</th>
+                        <th>Data</th>
+                        <th>Wskaźnik płynności bieżącej</th>
+                        <th>Wskaźnik płynności szybkiej</th>
+                        <th>Wskaźnik płynności natychmiastowej</th>
+                        <th>Wskaźnik pokrycia zobowiązań handlowych należnościami</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.submit_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ result.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ result.liquidity_current | round(2) if result.liquidity_current is not none else 'N/A' }}</td>
+                        <td>{{ result.liquidity_quick | round(2) if result.liquidity_quick is not none else 'N/A' }}</td>
+                        <td>{{ result.liquidity_immediate | round(2) if result.liquidity_immediate is not none else 'N/A' }}</td>
+                        <td>{{ result.coverage_payables | round(2) if result.coverage_payables is not none else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-        <table>
-            <caption>Wskaźniki pasywów</caption>
-            <thead>
-                <tr>
-                    <th>Result3</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Placeholder for Result3</td>
-                </tr>
-                <!-- Add more rows as needed -->
-            </tbody>
-        </table>
-        
-        <a href="{{ url_for('main.index') }}">Back to Home</a>
+            <!-- Table for Rotation Ratios -->
+            <table>
+                <caption>Wskaźniki rotacji</caption>
+                <thead>
+                    <tr>
+                        <th>Data dodania</th>
+                        <th>Data</th>
+                        <th>OSN – okres spływu należności</th>
+                        <th>OUZ – okres utrzymywania zapasów</th>
+                        <th>ORZ – okres realizacji zobowiązań</th>
+                        <th>CO – cykl operacyjny</th>
+                        <th>CKG – cykl konwersji gotówki</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.submit_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ result.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ result.osn | round(2) if result.osn is not none else 'N/A' }}</td>
+                        <td>{{ result.ouz | round(2) if result.ouz is not none else 'N/A' }}</td>
+                        <td>{{ result.orz | round(2) if result.orz is not none else 'N/A' }}</td>
+                        <td>{{ result.co | round(2) if result.co is not none else 'N/A' }}</td>
+                        <td>{{ result.ckg | round(2) if result.ckg is not none else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Table for Debt Ratios -->
+            <table>
+                <caption>Wskaźniki zadłużenia</caption>
+                <thead>
+                    <tr>
+                        <th>Data dodania</th>
+                        <th>Data</th>
+                        <th>Wskaźnik ogólnego zadłużenia</th>
+                        <th>Wskaźnik zadłużenia kapitału własnego</th>
+                        <th>Wskaźnik zadłużenia długoterminowego</th>
+                        <th>Wskaźnik struktury pasywów</th>
+                        <th>Wskaźnik zadłużenia rzeczowych aktywów trwałych</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.submit_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ result.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ result.debt_ratio | round(2) if result.debt_ratio is not none else 'N/A' }}</td>
+                        <td>{{ result.debt_equity_ratio | round(2) if result.debt_equity_ratio is not none else 'N/A' }}</td>
+                        <td>{{ result.long_term_debt_ratio | round(2) if result.long_term_debt_ratio is not none else 'N/A' }}</td>
+                        <td>{{ result.liability_structure_ratio | round(2) if result.liability_structure_ratio is not none else 'N/A' }}</td>
+                        <td>{{ result.fixed_assets_debt_ratio | round(2) if result.fixed_assets_debt_ratio is not none else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+    <a href="{{ url_for('main.index') }}">Powrót do strony głównej</a>
 </body>
 </html>
+
+
+
+
+
