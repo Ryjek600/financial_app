@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Put</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            margin: 20px;
+        }
+        .form-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"], input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 5px 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Strona wprowadzania danych</h1>
+    <div class="form-container">
+        <div class="form-section">
+            <form action="{{ url_for('main.dataput') }}" method="post">
+                <label for="date">Data:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="total_assets">Aktywa ogółem:</label>
+                <input type="number" id="total_assets" name="total_assets" step="0.01" required>
+
+                <label for="fixed_assets">Rzeczowe aktywa trwałe:</label>
+                <input type="number" id="fixed_assets" name="fixed_assets" step="0.01" required>
+
+                <label for="current_assets">Aktywa obrotowe:</label>
+                <input type="number" id="current_assets" name="current_assets" step="0.01" required>
+
+                <label for="short_term_receivables">Należności krótkoterminowe:</label>
+                <input type="number" id="short_term_receivables" name="short_term_receivables" step="0.01" required>
+
+                <label for="cash_and_equivalents">Środki pieniężne i ich ekwiwalenty:</label>
+                <input type="number" id="cash_and_equivalents" name="cash_and_equivalents" step="0.01" required>
+
+                <label for="inventory">Zapasy:</label>
+                <input type="number" id="inventory" name="inventory" step="0.01" required>
+
+                <label for="short_term_liabilities">Zobowiązania krótkoterminowe:</label>
+                <input type="number" id="short_term_liabilities" name="short_term_liabilities" step="0.01" required>
+
+                <label for="long_term_liabilities">Zobowiązania długoterminowe:</label>
+                <input type="number" id="long_term_liabilities" name="long_term_liabilities" step="0.01" required>
+
+                <label for="trade_payables">Zobowiązania z tyt. dostaw i usług:</label>
+                <input type="number" id="trade_payables" name="trade_payables" step="0.01" required>
+
+                <label for="equity">Kapitał własny:</label>
+                <input type="number" id="equity" name="equity" step="0.01" required>
+
+                <label for="net_revenues">Przychody netto z tyt. dostaw i usług:</label>
+                <input type="number" id="net_revenues" name="net_revenues" step="0.01" required>
+
+                <label for="operating_costs">Koszty działalności operacyjnej:</label>
+                <input type="number" id="operating_costs" name="operating_costs" step="0.01" required>
+
+                <button type="submit">Wyślij</button>
+            </form>
+        </div>
+    </div>
+    <a class="back-button" href="{{ url_for('main.index') }}">Powrót do strony głównej</a>
+</body>
+</html>
+
+

@@ -4,6 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Zmieniona czcionka */
+            background-color: #f0f0f0; /* Jasnoszare tło */
+            text-align: center; /* Wyśrodkowanie całego tekstu */
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        p {
+            margin: 20px 0;
+        }
+        a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff; /* Kolor przycisków */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px; /* Zaokrąglenie przycisków */
+        }
+        a:hover {
+            background-color: #0056b3; /* Kolor przycisku po najechaniu */
+        }
+        form {
+            margin: 20px;
+        }
+        button {
+            background-color: #dc3545; /* Kolor przycisku logout */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c82333; /* Kolor przycisku logout po najechaniu */
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to the Home Page</h1>
@@ -12,8 +53,9 @@
         <p>Hello, User!</p>
         <!-- Przycisk do strony wyników -->
         <a href="{{ url_for('main.results') }}">Go to Results Page</a>
-        <br>
-        <!-- Formularz logout -->
+        <!-- Przycisk do strony upload -->
+        <a href="{{ url_for('main.upload') }}">Go to Upload Page</a>
+        <!-- Przycisk logout -->
         <form action="{{ url_for('main.logout') }}" method="post">
             <button type="submit">Logout</button>
         </form>
@@ -24,7 +66,6 @@
     {% endif %}
 </body>
 </html>
-
 
 
 

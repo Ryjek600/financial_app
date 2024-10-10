@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload XML File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Zmieniona czcionka */
+            background-color: #f0f0f0; /* Jasnoszare tło */
+            text-align: center; /* Wyśrodkowanie całego tekstu */
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        form {
+            margin: 20px;
+            display: inline-block; /* Wyśrodkowanie formularza */
+            background: white; /* Tło formularza */
+            padding: 20px; /* Padding dla formularza */
+            border-radius: 5px; /* Zaokrąglenie rogów formularza */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Cień formularza */
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        input[type="submit"] {
+            background-color: #007bff; /* Kolor przycisku upload */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Kolor przycisku upload po najechaniu */
+        }
+        p {
+            margin: 20px 0;
+        }
+        a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff; /* Kolor przycisków */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px; /* Zaokrąglenie przycisków */
+        }
+        a:hover {
+            background-color: #0056b3; /* Kolor przycisków po najechaniu */
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload XML File</h1>
+    <form action="{{ url_for('main.insertxml') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xml">
+        <input type="submit" value="Upload">
+    </form>
+    <p>Upload Results</p>
+    <!-- Przycisk powrotu do strony głównej -->
+    <a href="{{ url_for('main.dataput') }}">Podaj dane</a>
+    <a href="{{ url_for('main.index') }}">Return to Main Page</a>
+</body>
+</html>
+
